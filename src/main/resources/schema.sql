@@ -8,7 +8,6 @@ create TABLE customers (
         company_code LONG DEFAULT NULL,
         personal_code LONG DEFAULT NULL,
         address VARCHAR(250) DEFAULT NULL,
---        ordered_services ARRAY DEFAULT NULL,
         PRIMARY KEY(id)
 );
 
@@ -33,9 +32,9 @@ create TABLE ordered_services (
         customer_id LONG,
         msisdn_id LONG,
         PRIMARY KEY(id),
-        foreign KEY(offered_service_id) references offered_services(id),
-        foreign KEY(customer_id) references customers(id),
-        foreign KEY(msisdn_id) references msisdns(id)
+        foreign KEY(offered_service_id) references offered_services(id) ON DELETE CASCADE,
+        foreign KEY(customer_id) references customers(id) ON DELETE CASCADE,
+        foreign KEY(msisdn_id) references msisdns(id)  ON DELETE CASCADE
 );
 
 drop table IF EXISTS accounts;
@@ -46,7 +45,7 @@ create TABLE accounts (
         address VARCHAR(250) DEFAULT NULL,
         customer_id LONG,
         PRIMARY KEY(id),
-        foreign KEY(customer_id) references customers(id)
+        foreign KEY(customer_id) references customers(id) ON DELETE CASCADE
 
 );
 
@@ -58,7 +57,7 @@ create TABLE msisdns (
         active_to DATE DEFAULT NULL,
                 account_id LONG,
         PRIMARY KEY(id),
-        foreign KEY(account_id) references accounts(id),
+        foreign KEY(account_id) references accounts(id) ON DELETE CASCADE,
 );
 
 drop table IF EXISTS phone_numbers;
@@ -69,5 +68,5 @@ create TABLE phone_numbers (
         ph_number LONG DEFAULT NULL,
         msisdn_id LONG,
         PRIMARY KEY(id),
-        foreign KEY(msisdn_id) references msisdns(id)
+        foreign KEY(msisdn_id) references msisdns(id) ON DELETE CASCADE
 );

@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 
 @Data
@@ -26,9 +27,11 @@ public class Customer {
     @Column(name = "id")
     private Long id;
 
+    @NotEmpty(message = "Please provide a name")
     @Column(name = "name", nullable = false)
     private String name;
 
+    @NotEmpty(message = "Please provide a surname")
     @Column(name = "surname", nullable = false)
     private String surname;
 
