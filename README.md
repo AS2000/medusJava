@@ -63,7 +63,8 @@ MethodArgumentNotValidException<br/>
 ·        MSISDN attributes: Id, Active From, Active To. MSISDN can have multiple Ordered Services.<br/>
 ·        Ordered Service attributes: Id, ServiceId, Name, Active From, Active To. ServiceId = Service(Id)<br/>
 <br/>
- <br/>
+Project File structure schema: <b>medus-v0.1_File_Structure_Schema.jpg</b><br/>
+<br/>
 <b>Start the Application</b>:<br/>
 <br/>
 <b>Easy way:</b><br/>
