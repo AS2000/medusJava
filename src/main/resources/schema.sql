@@ -22,6 +22,32 @@ create TABLE offered_services (
         PRIMARY KEY(id)
 );
 
+
+drop table IF EXISTS accounts;
+
+create TABLE accounts (
+        id LONG NOT NULL AUTO_INCREMENT,
+        name VARCHAR(250) NOT NULL,
+        address VARCHAR(250) DEFAULT NULL,
+        customer_id LONG,
+        PRIMARY KEY(id),
+        foreign KEY(customer_id) references customers(id) ON DELETE CASCADE
+
+);
+
+
+drop table IF EXISTS msisdns;
+
+create TABLE msisdns (
+        id LONG NOT NULL AUTO_INCREMENT,
+        active_from DATE DEFAULT NULL,
+        active_to DATE DEFAULT NULL,
+                account_id LONG,
+        PRIMARY KEY(id),
+        foreign KEY(account_id) references accounts(id) ON DELETE CASCADE,
+);
+
+
 drop table IF EXISTS ordered_services;
 
 create TABLE ordered_services (
@@ -37,28 +63,6 @@ create TABLE ordered_services (
         foreign KEY(msisdn_id) references msisdns(id)  ON DELETE CASCADE
 );
 
-drop table IF EXISTS accounts;
-
-create TABLE accounts (
-        id LONG NOT NULL AUTO_INCREMENT,
-        name VARCHAR(250) NOT NULL,
-        address VARCHAR(250) DEFAULT NULL,
-        customer_id LONG,
-        PRIMARY KEY(id),
-        foreign KEY(customer_id) references customers(id) ON DELETE CASCADE
-
-);
-
-drop table IF EXISTS msisdns;
-
-create TABLE msisdns (
-        id LONG NOT NULL AUTO_INCREMENT,
-        active_from DATE DEFAULT NULL,
-        active_to DATE DEFAULT NULL,
-                account_id LONG,
-        PRIMARY KEY(id),
-        foreign KEY(account_id) references accounts(id) ON DELETE CASCADE,
-);
 
 drop table IF EXISTS phone_numbers;
 
